@@ -1,0 +1,30 @@
+# Core stack: heart_age_classifier.py, create_age_classifier.ipynb, data_visualizer.ipynb
+# Note: PyTorch wheels for py311 may still be built against NumPy 1.x ABI.
+# Pin NumPy/Pandas to a compatible pair for the CNN path.
+numpy>=1.24,<2
+pandas>=2.0,<3
+
+# heart_age_classifier.py / create_age_classifier.ipynb (RandomForest, k-NN, XGBoost, pipelines, model save/load)
+scikit-learn>=1.3
+joblib>=1.3
+xgboost>=2.0
+
+# data_visualizer.ipynb (plots, distributions, pairplots)
+matplotlib>=3.7
+seaborn>=0.13
+ipywidgets>=8.0
+
+# Signal processing (Chebyshev smoothing in data_visualizer.ipynb and heart_age_classifier.py)
+scipy>=1.10
+
+# Deep learning (ResNet-1D in create_age_classifier.ipynb)
+# Apple Silicon note: PyTorch provides native arm64 wheels for macOS on supported Python versions.
+# TensorFlow is intentionally not required; the CNN path uses PyTorch.
+# For pip installs, prefer Python 3.11/3.12 (PyTorch wheels are not typically available for 3.13 yet).
+# Some restricted package indexes only expose torch up to 2.2.x; keep versions compatible as a set.
+torch>=2.2.0,<2.3; python_version >= "3.11" and python_version < "3.13"
+torchvision>=0.17.0,<0.18; python_version >= "3.11" and python_version < "3.13"
+torchaudio>=2.2.0,<2.3; python_version >= "3.11" and python_version < "3.13"
+
+# Jupyter kernels for .ipynb (VS Code / Cursor / Jupyter)
+ipykernel>=6.25
