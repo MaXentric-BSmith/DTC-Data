@@ -1,30 +1,30 @@
-# Core stack: heart_age_classifier.py, create_age_classifier.ipynb, data_visualizer.ipynb
-# Note: PyTorch wheels for py311 may still be built against NumPy 1.x ABI.
-# Pin NumPy/Pandas to a compatible pair for the CNN path.
-numpy>=1.24,<2
-pandas>=2.0,<3
+# MaXentric DTC age-classifier submission
+# Recommended: Python 3.11 or 3.12 (64-bit). See README.md for install notes.
+#
+# Full stack (tree models + notebooks + ResNet-1D CNN):
+#   python -m venv .venv && source .venv/bin/activate
+#   pip install -U pip
+#   pip install -r requirements.txt
+#
+# Tree-model / visualization only (no PyTorch): see README.md — install packages above the torch lines manually.
 
-# heart_age_classifier.py / create_age_classifier.ipynb (RandomForest, k-NN, XGBoost, pipelines, model save/load)
-scikit-learn>=1.3
-joblib>=1.3
-xgboost>=2.0
+# --- Core numerics (NumPy 1.x ABI matches current PyTorch wheels on macOS/Linux) ---
+numpy>=1.26,<2
+pandas>=2.1,<3
+scipy>=1.11,<2
 
-# data_visualizer.ipynb (plots, distributions, pairplots)
-matplotlib>=3.7
-seaborn>=0.13
-ipywidgets>=8.0
+# --- Classical ML pipelines (heart_age_classifier.py, notebooks) ---
+scikit-learn>=1.4,<2
+joblib>=1.3,<2
+xgboost>=2.0,<3
 
-# Signal processing (Chebyshev smoothing in data_visualizer.ipynb and heart_age_classifier.py)
-scipy>=1.10
+# --- Plotting & interactive notebooks ---
+matplotlib>=3.8,<4
+seaborn>=0.13,<1
+ipywidgets>=8.1,<9
+ipykernel>=6.29,<7
 
-# Deep learning (ResNet-1D in create_age_classifier.ipynb)
-# Apple Silicon note: PyTorch provides native arm64 wheels for macOS on supported Python versions.
-# TensorFlow is intentionally not required; the CNN path uses PyTorch.
-# For pip installs, prefer Python 3.11/3.12 (PyTorch wheels are not typically available for 3.13 yet).
-# Some restricted package indexes only expose torch up to 2.2.x; keep versions compatible as a set.
+# --- Deep learning (create_age_classifier.ipynb ResNet-1D; optional on Python 3.13+) ---
 torch>=2.2.0,<2.3; python_version >= "3.11" and python_version < "3.13"
 torchvision>=0.17.0,<0.18; python_version >= "3.11" and python_version < "3.13"
 torchaudio>=2.2.0,<2.3; python_version >= "3.11" and python_version < "3.13"
-
-# Jupyter kernels for .ipynb (VS Code / Cursor / Jupyter)
-ipykernel>=6.25
